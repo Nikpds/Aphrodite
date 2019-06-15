@@ -1,25 +1,53 @@
-<div class="bgimg">
+<section class="hero is-large">
   <div class="overlay"></div>
-  <nav class="nav">
-    <div class="container">
-      <div class="logo">
-        <a href="#">Your Logo</a>
-      </div>
-      <div id="mainListDiv" class="main_list">
-        <ul class="navlinks">
-          <li><a href="#">About</a></li>
-          <li><a href="#">Portfolio</a></li>        
-        </ul>
-      </div>
-      <span class="navTrigger">
-        <i></i>
-        <i></i>
-        <i></i>
-      </span>
-    </div>
-  </nav>
-
-  <div class="center-position">
-    as
+  <div class="hero-head">
+    <app-navbar></app-navbar>
   </div>
-</div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-centered is-multiline">
+        <div class="column is-12 is-size-2 has-text-dark has-text-weight-bold">
+          <span class="">Παντρεύονται</span>
+        </div>
+        <div class="column is-12 is-size-2 is-italic  has-text-white">
+          <span class="">Κώστας</span> &
+          <span class="has-text-danger">Νάνσυ</span>
+        </div>
+        <div class="column is-12 is-size-3 has-text-dark has-text-weight-bold">
+          <span class="">{{ targetDay | date: "dd-MM-yyyy" }}</span>
+        </div>
+      </div>
+      <br /><br />
+      <div class="columns is-centered">
+        <div class="column is-6">
+          <nav class="level is-mobile">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="title is-2 has-text-white">{{ timeLeft.days }}</p>
+                <p class="heading is-size-6 has-text-white">days</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="title is-2 has-text-white">{{ timeLeft.hours }}</p>
+                <p class="heading is-size-6 has-text-white">hours</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="title is-2 has-text-white">{{ timeLeft.minutes }}</p>
+                <p class="heading is-size-6 has-text-white">min</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="title is-2 has-text-white">{{ timeLeft.seconds }}</p>
+                <p class="heading is-size-6 has-text-white">sec</p>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

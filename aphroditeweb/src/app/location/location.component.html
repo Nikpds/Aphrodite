@@ -1,0 +1,39 @@
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="title is-2 is-marginless has-text-centered">
+        Το <span class="has-text-danger">Εκκλησάκι</span>
+      </div>
+      <div class="title is-2 has-text-centered">
+        <span class="has-text-danger">Αγία</span> Παρασκεύη
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <div id="invitation-map" class="map"></div>
+        </div>
+        <div class="column is-6 map">
+          <ngx-slick
+            class="carousel"
+            #slickModal="slick-modal"
+            [config]="slideConfig"
+            (init)="slickInit($event)"
+          >
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+              <img src="{{ slide.img }}" alt="" width="100%" />
+            </div>
+          </ngx-slick>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <br />
+          <a
+            class="button is-danger"
+            href="{{ googlemapspath }}"
+            target="_blank"
+          >
+            Πλοήγηση σε Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
