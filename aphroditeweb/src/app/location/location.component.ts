@@ -9,6 +9,10 @@ import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
 import { Point } from 'ol/geom';
 import { Icon, Style } from 'ol/style';
+import Overlay from 'ol/Overlay';
+import { click } from 'ol/events/condition';
+import Select from 'ol/interaction/Select';
+
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
@@ -16,7 +20,8 @@ import { Icon, Style } from 'ol/style';
 })
 export class LocationComponent implements OnInit {
   @ViewChild('slickModal') element;
-  googlemapspath = `https://www.google.com/maps/dir/''/%CE%91%CE%B3%CE%AF%CE%B1+%CE%A0%CE%B1%CF%81%CE%B1%CF%83%CE%BA%CE%B5%CF%85%CE%AE` +
+  googlemapspath =
+    `https://www.google.com/maps/dir/''/%CE%91%CE%B3%CE%AF%CE%B1+%CE%A0%CE%B1%CF%81%CE%B1%CF%83%CE%BA%CE%B5%CF%85%CE%AE` +
     `,+%CE%A3%CF%8D%CE%B2%CE%BF%CF%84%CE%B1+461+00/@39.4600705,20.2444492,13z/data=!4m14!4m13!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260` +
     `771205!2m2!1d20.2569809!2d39.4613348!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260771205!2m2!1d20.2569809!2d39.4613348!3e3">`;
   map: OlMap;
@@ -38,40 +43,48 @@ export class LocationComponent implements OnInit {
     speed: 1000,
     draggable: false
   };
-  constructor() { }
+  places = [
+    {
+      id: 1,
+      label: 'Εκκλησία',
+      location: fromLonLat([20.2569615, 39.4613958]),
+      googlemapspath:
+        `https://www.google.com/maps/dir/''/%CE%91%CE%B3%CE%AF%CE%B1+%CE%A0%CE%B1%CF%81%CE%B1%CF%83%CE%BA%CE%B5%CF%85%CE%AE,+%CE%` +
+        `A3%CF%8D%CE%B2%CE%BF%CF%84%CE%B1+461+00/@39.4600705,20.2444492,13z/data=!4m14!4m13!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260` +
+        `771205!2m2!1d20.2569809!2d39.4613348!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260771205!2m2!1d20.2569809!2d39.4613348!3e3">`
+    },
+    {
+      id: 2,
+      label: 'Κώστας',
+      location: fromLonLat([20.303232, 39.454724]),
+      googlemapspath:
+        'https://www.google.com/maps/place/39.454724,20.303232/data=!4m6!3m5!1s0' +
+        '!7e2!8m2!3d39.4547245!4d20.3032319?utm_source=mstt_1'
+    },
+    {
+      id: 3,
+      label: 'Νάνσυ',
+      location: fromLonLat([20.2810581, 39.4532962]),
+      googlemapspath:
+        'https://www.google.com/maps/place/Sunny+Garden+Villa/@39.4532962,20.2810581,15z/' +
+        'data=!4m2!3m1!1s0x0:0xb8314c17b84fad2d?sa=X&ved=2ahUKEwjprZ_v0pDjAhVGYVAKHRHcANwQ_BIwD3oECA4QCA'
+    }
+  ];
+
+  constructor() {}
 
   ngOnInit() {
-
-    const church = new Feature({
-      text: 'asdasd',
-      geometry: new Point(
-        fromLonLat([20.2569615, 39.4613958])
-      ),  // Cordinates of New York's Town Hall
-    });
-    const kostasHome = new Feature({
-      geometry: new Point(
-        fromLonLat([20.303232, 39.454724])
-      ),  // Cordinates of New York's Town Hall
-    });
-    const nansyHome = new Feature({
-      geometry: new Point(
-        fromLonLat([20.2810581, 39.4532962])
-      ),  // Cordinates of New York's Town Hall
-    });
-
     const iconStyle = new Style({
-      image: new Icon(({
+      image: new Icon({
         anchor: [0.5, 46],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         opacity: 0.75,
-        src: '../../assets/marker-icon.png',
-        text: 'asdasd'
-      })),
-
+        src: '../../assets/marker-icon.png'
+      })
     });
     const vectorSource = new Vector({
-      features: [nansyHome, kostasHome, church]
+      features: this.createFeatures(this.places)
     });
     const markerVectorLayer = new OlVectorLayer({
       source: vectorSource,
@@ -96,9 +109,58 @@ export class LocationComponent implements OnInit {
       view: this.view
     });
 
+    // add labels for each place
+    this.places.forEach(place => this.addLabel(place));
+
+    const select = new Select({
+      condition: click
+    });
+
+    select.on('select', evt => {
+      // if a place is selected
+      if (evt.selected && evt.selected.length > 0) {
+        const selectedFeature = evt.selected[0];
+        selectedFeature.setStyle(
+          new Style({
+            image: new Icon({
+              anchor: [0.5, 46],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              opacity: 0.75,
+              src: '../../assets/marker-icon.png'
+            })
+          })
+        );
+        const place = this.places.filter(
+          p => p.id === selectedFeature.getId()
+        )[0];
+        window.open(place.googlemapspath, '_blank');
+      }
+    });
+
+    this.map.addInteraction(select);
   }
 
   slickInit(s: any) {
     s.slick.slickPlay();
+  }
+
+  createFeatures(places: any[]): Feature[] {
+    return places.map(place => {
+      const feature = new Feature({ geometry: new Point(place.location) });
+      feature.setId(place.id);
+      return feature;
+    });
+  }
+
+  addLabel(place: any): Overlay {
+    const div = document.createElement('div');
+    div.innerHTML = place.label;
+    div.className = 'markerTitle';
+    const label = new Overlay({
+      position: place.location,
+      element: div
+    });
+    this.map.addOverlay(label);
   }
 }
