@@ -42,9 +42,20 @@ export class LocationComponent implements OnInit {
 
   ngOnInit() {
 
-    const marker = new Feature({
+    const church = new Feature({
+      text: 'asdasd',
       geometry: new Point(
         fromLonLat([20.2569615, 39.4613958])
+      ),  // Cordinates of New York's Town Hall
+    });
+    const kostasHome = new Feature({
+      geometry: new Point(
+        fromLonLat([20.303232, 39.454724])
+      ),  // Cordinates of New York's Town Hall
+    });
+    const nansyHome = new Feature({
+      geometry: new Point(
+        fromLonLat([20.2810581, 39.4532962])
       ),  // Cordinates of New York's Town Hall
     });
 
@@ -54,11 +65,13 @@ export class LocationComponent implements OnInit {
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         opacity: 0.75,
-        src: '../../assets/marker-icon.png'
-      }))
+        src: '../../assets/marker-icon.png',
+        text: 'asdasd'
+      })),
+
     });
     const vectorSource = new Vector({
-      features: [marker]
+      features: [nansyHome, kostasHome, church]
     });
     const markerVectorLayer = new OlVectorLayer({
       source: vectorSource,
@@ -73,8 +86,8 @@ export class LocationComponent implements OnInit {
     });
 
     this.view = new OlView({
-      center: fromLonLat([20.2219615, 39.4613958]),
-      zoom: 11
+      center: fromLonLat([20.2619615, 39.4613958]),
+      zoom: 12
     });
 
     this.map = new OlMap({
