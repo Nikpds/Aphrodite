@@ -23,7 +23,10 @@ export class TheprogrammComponent implements OnInit {
   nansyPath =
     'https://www.google.com/maps/place/Sunny+Garden+Villa/@39.4532962,20.2810581,15z/' +
     'data=!4m2!3m1!1s0x0:0xb8314c17b84fad2d?sa=X&ved=2ahUKEwjprZ_v0pDjAhVGYVAKHRHcANwQ_BIwD3oECA4QCA';
-  constructor() {}
+  ktimaPath =
+    `https://www.google.com/maps/place/Sun+Bar+-+Dei+Beach/@39.4177052,20.2338221,15.96z/data=!4m5!3m4!1s0x135c83e15ef1` +
+    `db3f:0xbd8720318e94601e!8m2!3d39.4165575!4d20.2314071`;
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

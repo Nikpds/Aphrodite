@@ -20,10 +20,7 @@ import Select from 'ol/interaction/Select';
 })
 export class LocationComponent implements OnInit {
   @ViewChild('slickModal') element;
-  googlemapspath =
-    `https://www.google.com/maps/dir/''/%CE%91%CE%B3%CE%AF%CE%B1+%CE%A0%CE%B1%CF%81%CE%B1%CF%83%CE%BA%CE%B5%CF%85%CE%AE` +
-    `,+%CE%A3%CF%8D%CE%B2%CE%BF%CF%84%CE%B1+461+00/@39.4600705,20.2444492,13z/data=!4m14!4m13!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260` +
-    `771205!2m2!1d20.2569809!2d39.4613348!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260771205!2m2!1d20.2569809!2d39.4613348!3e3">`;
+
   map: OlMap;
   source: OlXYZ;
   layer: OlTileLayer;
@@ -68,10 +65,18 @@ export class LocationComponent implements OnInit {
       googlemapspath:
         'https://www.google.com/maps/place/Sunny+Garden+Villa/@39.4532962,20.2810581,15z/' +
         'data=!4m2!3m1!1s0x0:0xb8314c17b84fad2d?sa=X&ved=2ahUKEwjprZ_v0pDjAhVGYVAKHRHcANwQ_BIwD3oECA4QCA'
+    },
+    {
+      id: 4,
+      label: 'Δεξίωση',
+      location: fromLonLat([20.2338221, 39.4177052]),
+      googlemapspath:
+        `https://www.google.com/maps/place/Sun+Bar+-+Dei+Beach/@39.4177052,20.2338221,15.96z/data=!4m5!3m4!1s0x135c83e15ef1` +
+        `db3f:0xbd8720318e94601e!8m2!3d39.4165575!4d20.2314071`
     }
   ];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     const iconStyle = new Style({

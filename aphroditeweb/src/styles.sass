@@ -7,15 +7,19 @@ $link: #31f0ff
 $link-hover: darken($link,25%)
 @import '../node_modules/bulma/sass/utilities/_all.sass'
 @import "../node_modules/bulma-timeline/src/sass/index.sass"
+@font-face 
+    font-family: 'Graduate' 
+    src: url('../src/assets/fonts/AC-Liberate.ttf') format('truetype')
 
 @import "../node_modules/bulma/bulma.sass"
 html,body
     height: 100%
-    font-family: 'EB Garamond', serif
+    font-family: 'Graduate', sans-serif
     overflow: auto
+    font-weight: 400
 
 .markerTitle
-    margin-left: -30px
+    margin-left: -45px
     margin-top: -75px!important
     color: black
     font-weight: 800

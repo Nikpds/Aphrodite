@@ -9,6 +9,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { InvitationComponent } from './invitation/invitation.component';
 import { LocationComponent } from './location/location.component';
 import { TheprogrammComponent } from './theprogramm/theprogramm.component';
+import { DropboxComponent } from './dropbox/dropbox.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TheprogrammComponent } from './theprogramm/theprogramm.component';
     AboutusComponent,
     InvitationComponent,
     LocationComponent,
-    TheprogrammComponent
+    TheprogrammComponent,
+    DropboxComponent
   ],
   imports: [
     BrowserModule,
