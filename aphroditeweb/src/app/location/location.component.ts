@@ -44,11 +44,9 @@ export class LocationComponent implements OnInit {
     {
       id: 1,
       label: 'Εκκλησία',
-      location: fromLonLat([20.2569615, 39.4613958]),
+      location: fromLonLat([20.257348, 39.462046]),
       googlemapspath:
-        `https://www.google.com/maps/dir/''/%CE%91%CE%B3%CE%AF%CE%B1+%CE%A0%CE%B1%CF%81%CE%B1%CF%83%CE%BA%CE%B5%CF%85%CE%AE,+%CE%` +
-        `A3%CF%8D%CE%B2%CE%BF%CF%84%CE%B1+461+00/@39.4600705,20.2444492,13z/data=!4m14!4m13!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260` +
-        `771205!2m2!1d20.2569809!2d39.4613348!1m5!1m1!1s0x135c81e985caee5b:0x6c83d0a260771205!2m2!1d20.2569809!2d39.4613348!3e3">`
+        `https://www.google.com/maps/dir//39.462046,20.257348/@39.4592507,20.255749,16.75z/data=!4m2!4m1!3e0`
     },
     {
       id: 2,

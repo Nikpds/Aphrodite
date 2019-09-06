@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  targetDay = new Date('2019-07-13T20:00:00');
+  targetDay = new Date('2019-07-13');
   timeLeft = {
     days: 0,
     hours: 0,
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.targetDay.setUTCHours(15, 0, 0);
     this.getSnapshotOfTime();
     this.interval = setInterval(() => {
       this.getSnapshotOfTime();
